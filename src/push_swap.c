@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-abbo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:00:35 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/11 02:44:12 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/15 03:54:53 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <limits.h>
-#include <stdio.h>
-
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
 
 int	ft_len(char **str)
 {
@@ -56,161 +41,6 @@ t_list	*add_to_stack(char **args, int size)
 	return (a);
 }
 
-int	check_duplicates(char **args)
-{
-	int i, j;
-	i = 0;
-	while (args[i])
-	{
-		j = i + 1;
-		while (args[j])
-		{
-			if (ft_atoi(args[i]) == ft_atoi(args[j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	is_valid_number(char *str)
-{
-	long	nb;
-
-	int(i), (sign);
-	(i = 0), (sign = 1), (nb = 0);
-	while (str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		nb = nb * 10 + (str[i] - '0');
-		if ((nb * sign) < INT_MIN || (nb * sign) > INT_MAX)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_sorted(t_list *stack)
-{
-	while (stack && stack->next)
-	{
-		if (stack->content > stack->next->content)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-int	count_args(int size, char **av)
-{
-	char	**split;
-
-	int(count), (i), (j);
-	count = 0;
-	i = 0;
-	while (i < size)
-	{
-		split = ft_split(av[i], ' ');
-		j = 0;
-		while (split[j])
-		{
-			count++;
-			j++;
-		}
-		ft_free(split);
-		i++;
-	}
-	return (count);
-}
-
-void	ft_join(char **split, char **args, int *k)
-{
-	int	j;
-
-	j = 0;
-	while (split[j])
-	{
-		args[*k] = ft_strdup(split[j]);
-		if (!is_valid_number(args[*k]))
-		{
-			ft_putstr_fd("Error\n", 2);
-			ft_free(args);
-			ft_free(split);
-			exit(1);
-		}
-		j++;
-		(*k)++;
-	}
-}
-int	ft_strlen_without_spaces(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-int	check_args(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		if (ft_strlen_without_spaces(args[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-char	**read_input(int ac, char **av)
-{
-	char(**args), (**split);
-	int(i), (k), (count);
-	(i = 1), (k = 0);
-	count = 0;
-	if (ac < 2)
-		exit(1);
-	count = count_args(ac, av);
-	args = malloc(sizeof(char *) * (count + 1));
-	if (!args)
-		return (0);
-	while (i < ac)
-	{
-		split = ft_split(av[i], ' ');
-		if (split == NULL)
-		{
-			free(split);
-			free(args);
-			exit(write(2, "Error\n", 6));
-		}
-		ft_join(split, args, &k);
-		ft_free(split);
-		i++;
-	}
-	args[k] = NULL;
-	return (args);
-}
 void	ft_free_lst(t_list *lst)
 {
 	t_list	*tmp;
@@ -317,6 +147,87 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	write(1, "pa\n", 3);
 }
 
+void	rrb(t_list **stack)
+{
+	t_list	*prev;
+	t_list	*last;
+	
+	prev = NULL;
+	last = *stack;
+	while (last->next)
+	{
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = *stack;
+	*stack = last;
+	write(1, "rrb\n", 4);
+}
+
+void sn_output(t_list **stack)
+{
+	t_list	*first;
+	t_list	*second;
+
+	first = *stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
+}
+
+void rn_output(t_list **stack)
+{
+    t_list	*first;
+    t_list	*last;
+
+    first = *stack;
+    last = *stack;
+    *stack = first->next;
+    while (last->next)
+        last = last->next;
+    last->next = first;
+    first->next = NULL;
+}
+
+void rrn_output(t_list **stack)
+{
+    t_list	*prev;
+    t_list	*last;
+
+    prev = NULL;
+    last = *stack;
+    while (last->next)
+    {
+        prev = last;
+        last = last->next;
+    }
+    prev->next = NULL;
+    last->next = *stack;
+    *stack = last;
+}
+
+void ss(t_list **stack_a, t_list **stack_b)
+{
+    sn_output(stack_a);
+    sn_output(stack_b);
+    write(1, "ss\n", 3);
+}
+
+void rr(t_list **stack_a, t_list **stack_b)
+{
+    rn_output(stack_a);
+    rn_output(stack_b);
+    write(1, "rr\n", 3);
+}
+
+void rrr(t_list **stack_a, t_list **stack_b)
+{
+    rrn_output(stack_a);
+    rrn_output(stack_b);
+    write(1, "rrr\n", 4);
+}
 
 
 void	sort_3(t_list **stack)
@@ -346,7 +257,7 @@ void	sort_3(t_list **stack)
 		sa(stack);
 }
 
-int	find_smallest_index(t_list *stack, int flag)
+int	find_smallest_index(t_list *stack)
 {
 	int	min;
 	int	index;
@@ -365,8 +276,6 @@ int	find_smallest_index(t_list *stack, int flag)
 		stack = stack->next;
 		i++;
 	}
-	if (flag == 1)
-		return (min);
 	return (index);
 }
 
@@ -374,13 +283,13 @@ void	sort_5(t_list **stack_a, t_list **stack_b)
 {
 	int	min_index;
 
-	min_index = find_smallest_index(*stack_a, 0);
+	min_index = find_smallest_index(*stack_a);
 	while (min_index--)
 		ra(stack_a);
 	pb(stack_a, stack_b);
 	if (ft_lstsize(*stack_a) == 4)
 	{
-		min_index = find_smallest_index(*stack_a, 0);
+		min_index = find_smallest_index(*stack_a);
 		while (min_index--)
 			ra(stack_a);
 		pb(stack_a, stack_b);
@@ -391,137 +300,160 @@ void	sort_5(t_list **stack_a, t_list **stack_b)
 		pa(stack_a, stack_b);
 }
 
-void	indexing_stack(t_list *stack)
+int get_optimal_chunk_count(int stack_size)
 {
-	t_list	*tmp;
-	int		min;
-	int		size;
-	int		i;
-	tmp = stack;
-	size = ft_lstsize(stack);
-	i = 0;
-	while (i < size)
-	{
-		stack = tmp;
-		min = find_smallest_index(stack, 1);
-		while(stack)
-		{
-			if(stack->content == min)
-				stack->index = i;
-			stack = stack->next;
-		}
-		i++;
-	}
-}
-// void lfassi(t_list *stack_a, t_list *stack_b)
-// {
-// 	if (x == stack_a)
-// 		ra(&stack_a);
-// 	if(x == stack_b)
-// 		pa(&stack_a, &stack_b);
-// 	if (x == stack_a->next->content)
-// 		sa(&stack_a);
-// 	if (x == stack_b->next->content)
-// 		sb(&stack_a, &stack_b);
-// 	if(x == stack_a->next->content && x_n == stack_a->next->next->content)
-// 		ss(&stack_a, &stack_b);
-// 	if(ft_lstlast(stack_b)->content == x)
-// 		rrb(&stack_b);
-// 	if(ft_lstlast(stack_a)->content == x)
-// 		rra(&stack_a);
-// 	if(ft_lstlast(stack_b)->content == x && ft_lstlast(stack_b)->prev->content == x_n)
-// 		rrr(&stack_a, &stack_b);
-// }
-
-void	reindexing_stack(t_list *stack)
-{
-	t_list	*tmp;
-	int		size;
-	int		i;
-	tmp = stack;
-	size = ft_lstsize(stack);
-	i = 0;
-	while (i < size)
-	{
-		stack = tmp;
-		while(stack)
-		{
-			stack->index = -1;
-			stack = stack->next;
-		}
-		i++;
-	}
+    if (stack_size <= 100)
+        return 5;
+    else
+        return 12;
 }
 
-void	quick_sort(t_list **stack_a, t_list **stack_b)
+int find_max(t_list *stack)
 {
-    int i;
-    int size;
-    int middle;
+	int max_value = INT_MIN;
+	int max_index = -1;
+	t_list *current = stack;
+
+	while (current)
+	{
+		if (current->content > max_value)
+		{
+			max_value = current->content;
+			max_index = current->index;
+		}
+		current = current->next;
+	}
+	return max_index;
+}
+
+void indexing_stack(t_list *stack)
+{
+    t_list *current = stack;
+    t_list *compare;
+    int index;
     
-    indexing_stack(*stack_a);
-    size = ft_lstsize(*stack_a);
-    middle = size / 2;
-    i = 0;
-    while (size > i)
+    while (current)
     {
-		
-        if ((*stack_a)->index <= middle)
-            pb(stack_a, stack_b);
-        else
-            ra(stack_a);
-        i++;
-    }
-	while(*stack_b)
-	{
-		i = 0;
-		reindexing_stack(*stack_b);
-		indexing_stack(*stack_b);
-		size = ft_lstsize(*stack_b);
-		middle = size / 2;
-		while(size > i)
-		{
-			if(ft_lstsize(*stack_b) == 1)
-			{
-				pa(stack_a, stack_b);
-				break;
-			}
-			if ((*stack_b)->index >= middle)
-				pa(stack_a, stack_b);
-			else
-				rb(stack_b);
-			i++;
-		}
-	}
-		
-}
-
-
-
-void	final_sort(t_list **stack_a)
-{
-	int i;
-	int size;
-	size = ft_lstsize(*stack_a);
-	i = 0;
-	while (i < size -1)
-    {
-        if ((*stack_a)->content > (*stack_a)->next->content)
+        index = 0;
+        compare = stack;
+        while (compare)
         {
-            sa(stack_a);
+            if (current->content > compare->content)
+                index++;
+            compare = compare->next;
         }
-        ra(stack_a);
-        i++;
+        current->index = index;
+        current = current->next;
     }
-	ra(stack_a);
 }
 
+int calculate_moves(t_list *stack, int max)
+{
+    int moves = 0;
+    t_list *tmp = stack;
+    while (tmp && tmp->index != max)
+    {
+        moves++;
+        tmp = tmp->next;
+    }
+	if(moves <= ft_lstsize(stack) / 2)
+		return (moves);
+	else
+		return (-moves);
+}
+
+void push_optimal_to_a(t_list **stack_a, t_list **stack_b)
+{
+    while (*stack_b)
+    {
+        int max = find_max(*stack_b);
+        int moves = calculate_moves(*stack_b, max);
+        
+        if (moves > 0)
+            while ((*stack_b)->index != max)
+                rb(stack_b);
+        else if (moves < 0)
+            while ((*stack_b)->index != max)
+                rrb(stack_b);
+        pa(stack_a, stack_b);
+		if ((*stack_a) && (*stack_a)->index == max - 1)
+			ra(stack_a);
+    }
+}
+
+
+
+void push_chunk(t_list **stack_a, t_list **stack_b, int chunk_min, int chunk_max, int chunk_size)
+{
+	int j;
+	int pushed;
+	int remaining;
+	
+	pushed = 0;
+	j = 0;
+	remaining = ft_lstsize(*stack_a);
+	while (j < remaining && *stack_a)
+	{
+		if ((*stack_a)->index >= chunk_min && (*stack_a)->index <= chunk_max)
+			{
+				pb(stack_a, stack_b);
+				pushed++;
+			}
+		else
+			ra(stack_a);
+		if(pushed == chunk_size)
+				break;
+		j++;
+	}
+}
+
+void push_chunks_to_b(t_list **stack_a, t_list **stack_b, int chunk_count)
+{
+    int total_size;
+    int chunk_size;
+	int chunk_min;
+	int chunk_max;
+    int i;
+    
+	total_size = ft_lstsize(*stack_a);
+	chunk_size = total_size / chunk_count;
+    indexing_stack(*stack_a);
+	i = 0;
+	while (i < chunk_count)
+	{
+		chunk_min = i * chunk_size;
+		chunk_max = (i + 1) * chunk_size - 1;
+		if (i == chunk_count - 1)
+			chunk_max = total_size - 1;
+		push_chunk(stack_a, stack_b, chunk_min, chunk_max, chunk_size);
+		i++;
+	}
+}
+
+void chunks_sort(t_list **stack_a, t_list **stack_b)
+{
+    int size;
+	int chunk_count;
+	
+	size = ft_lstsize(*stack_a);
+	if (size == 2)
+		sa(stack_a);
+	else if (size == 3)
+		sort_3(stack_a);
+	else if (size == 5 || size == 4)
+		sort_5(stack_a, stack_b);
+	else if (size > 5)
+	{
+    	chunk_count = get_optimal_chunk_count(size);
+    	push_chunks_to_b(stack_a, stack_b, chunk_count);
+    	push_optimal_to_a(stack_a, stack_b);
+	}
+}
 
 int	main(int argc, char **argv)
 {
 	char	**args;
 	int		len;
-	int		size;
 	t_list	*stack_a;
 	t_list	*stack_b;
 
@@ -543,25 +475,7 @@ int	main(int argc, char **argv)
 	stack_a = add_to_stack(args, len);
 	if (is_sorted(stack_a))
 		return (ft_free_lst(stack_a), 0);
-	size = ft_lstsize(stack_a);
-	if (size == 2)
-		sa(&stack_a);
-	else if (size == 3)
-		sort_3(&stack_a);
-	else if (size == 5 || size == 4)
-		sort_5(&stack_a, &stack_b);
-	if(size > 5)
-	{
-		quick_sort(&stack_a, &stack_b);
-		// quick_sort(&stack_a, &stack_b);
-		while (1)
-		{
-			final_sort(&stack_a);
-			if (is_sorted(stack_a))
-				break;
-		}
-		
-	}
+	chunks_sort(&stack_a, &stack_b);
 	// printf("stack_a\n");
 	// while(stack_a)
 	// {
@@ -578,4 +492,3 @@ int	main(int argc, char **argv)
 	ft_free(args);
 	return (0);
 }
-

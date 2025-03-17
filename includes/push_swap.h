@@ -5,13 +5,15 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 #include <stdio.h>
 
-typedef struct s_stack
-{
-    t_list  stack_a;
-    t_list  stack_b;
-}               t_stack;
-
+void	ft_join(char **split, char **args, int *k);
+char	**read_input(int ac, char **av);
+int	count_args(int size, char **av);
+void	ft_free(char **str);
+int	check_args(char **args);
+int	check_duplicates(char **args);
+int	is_sorted(t_list *stack);
 
 #endif
