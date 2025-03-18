@@ -2,7 +2,8 @@ CC = cc -g
 
 CFLAGS = -Wall -Wextra -Werror 
 
-SRCS = src/push_swap.c src/reading.c src/handle_error.c
+SRCS = src/push_swap.c src/reading.c src/handle_error.c src/operations_a.c src/operations_b.c \
+	   src/operations_u.c src/algo_sort.c src/algo_utils_1.c src/algo_utils_2.c
 
 OBJS = $(SRCS:.c=.o)
 

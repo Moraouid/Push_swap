@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-abbo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 01:54:46 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/15 02:00:24 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/18 05:53:00 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
 
 void	ft_free(char **str)
 {
@@ -29,9 +28,12 @@ void	ft_free(char **str)
 int	is_valid_number(char *str)
 {
 	long	nb;
+	int		i;
+	int		sign;
 
-	int(i), (sign);
-	(i = 0), (sign = 1), (nb = 0);
+	i = 0;
+	sign = 1;
+	nb = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -54,6 +56,30 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
+int	count_args(int size, char **av)
+{
+	char	**split;
+	int		count;
+	int		i;
+	int		j;
+
+	count = 0;
+	i = 0;
+	while (i < size)
+	{
+		split = ft_split(av[i], ' ');
+		j = 0;
+		while (split[j])
+		{
+			count++;
+			j++;
+		}
+		ft_free(split);
+		i++;
+	}
+	return (count);
+}
+
 void	ft_join(char **split, char **args, int *k)
 {
 	int	j;
@@ -74,33 +100,16 @@ void	ft_join(char **split, char **args, int *k)
 	}
 }
 
-int	count_args(int size, char **av)
-{
-	char	**split;
-
-	int(count), (i), (j);
-	count = 0;
-	i = 0;
-	while (i < size)
-	{
-		split = ft_split(av[i], ' ');
-		j = 0;
-		while (split[j])
-		{
-			count++;
-			j++;
-		}
-		ft_free(split);
-		i++;
-	}
-	return (count);
-}
-
 char	**read_input(int ac, char **av)
 {
-	char(**args), (**split);
-	int(i), (k), (count);
-	(i = 1), (k = 0);
+	char	**args;
+	char	**split;
+	int		i;
+	int		k;
+	int		count;
+
+	i = 1;
+	k = 0;
 	count = 0;
 	if (ac < 2)
 		exit(1);

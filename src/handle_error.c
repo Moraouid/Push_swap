@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-abbo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 02:07:30 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/15 02:09:00 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:27:22 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	check_duplicates(char **args)
 {
-	int i, j;
+	int	i;
+	int	j;
+
 	i = 0;
 	while (args[i])
 	{
@@ -70,4 +72,3 @@ int	check_args(char **args)
 	}
 	return (1);
 }
-

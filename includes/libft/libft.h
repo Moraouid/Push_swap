@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:15:56 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/10 22:10:44 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/17 22:25:53 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_list
 {
-	int			content;
-	int			index;
-	int			flage;
+	int				content;
+	int				index;
+	int				flage;
 	struct s_list	*next;
 }					t_list;
 
@@ -68,6 +68,6 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-int	count_word(char *str, char c);
+int					count_word(char *str, char c);
 
 #endif
