@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 01:54:46 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/19 12:59:59 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:23:48 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,27 @@ int	is_valid_number(char *str)
 {
 	long	nb;
 	int		i;
-	int		sign;
+	int		s;
 
 	i = 0;
 	nb = 0;
-	sign = 1;
+	s = 1;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			sign = -1;
+			s = -1;
 		i++;
 	}
 	if (!str[i])
 		return (0);
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		nb = nb * 10 + (str[i] - '0');
+		if (!ft_isdigit(str[i]) || (nb * s) < INT_MIN || (nb * s) > INT_MAX)
 			return (0);
-		nb = nb * 10 + (str[i++] - '0');
-		if ((nb * sign) < INT_MIN || (nb * sign) > INT_MAX)
-			return (0);
+		i++;
 	}
 	return (1);
 }
