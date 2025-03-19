@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:00:35 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/17 22:23:26 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:35:14 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,6 @@ int	main(int argc, char **argv)
 	if (is_sorted(stack_a))
 		return (ft_free_lst(stack_a), 0);
 	chunks_sort(&stack_a, &stack_b);
-	// printf("stack_a\n");
-	// while(stack_a)
-	// {
-	// 	printf("%d\n", stack_a->content);
-	// 	stack_a = stack_a->next;
-	// }
-	// printf("stack_b\n");
-	// while(stack_b)
-	// {
-	// 	printf("%d\n", stack_b->content);
-	// 	stack_b = stack_b->next;
-	// }
 	ft_free_lst(stack_a);
 	ft_free(args);
 	return (0);

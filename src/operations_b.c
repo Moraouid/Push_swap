@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 21:31:52 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/17 21:52:50 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/19 01:26:44 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	rb(t_list **stack)
 
 	first = *stack;
 	last = *stack;
+	if (!first || !first->next)
+		return ;
 	*stack = first->next;
 	while (last->next)
 		last = last->next;
