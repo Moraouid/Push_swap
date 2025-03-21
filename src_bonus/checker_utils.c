@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_utils_2.c                                     :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/17 22:13:36 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/21 01:36:44 by sel-abbo         ###   ########.fr       */
+/*   Created: 2025/03/19 22:41:00 by sel-abbo          #+#    #+#             */
+/*   Updated: 2025/03/21 01:58:39 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
-
-void	is_valid(int argc, char **argv, char ***args)
-{
-	if (!check_args(argv))
-		exit(write(2, "Error\n", 6));
-	*args = read_input(argc, argv);
-	if (!args)
-		exit(write(2, "Error\n", 6));
-}
+#include "../includes/checker_bonus.h"
 
 int	ft_len(char **str)
 {
@@ -48,6 +39,15 @@ t_list	*add_to_stack(char **args, int size)
 		i++;
 	}
 	return (a);
+}
+
+void	is_valid(int argc, char **argv, char ***args)
+{
+	if (!check_args(argv))
+		exit(write(2, "Error\n", 6));
+	*args = read_input(argc, argv);
+	if (!args)
+		exit(write(2, "Error\n", 6));
 }
 
 void	ft_free_lst(t_list *lst)

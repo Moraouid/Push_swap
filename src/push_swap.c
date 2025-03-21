@@ -6,20 +6,11 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 01:00:35 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/19 12:35:14 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:36:41 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	is_valid(int argc, char **argv, char ***args)
-{
-	if (!check_args(argv))
-		exit(write(1, "Error\n", 6));
-	*args = read_input(argc, argv);
-	if (!args)
-		exit(write(1, "Error\n", 6));
-}
 
 int	main(int argc, char **argv)
 {
@@ -35,7 +26,7 @@ int	main(int argc, char **argv)
 		return (ft_free(args), 0);
 	if (!check_duplicates(args))
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		ft_free(args);
 		exit(1);
 	}

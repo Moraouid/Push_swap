@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:08:55 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/18 21:21:45 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:17:15 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	find_smallest_index(t_list *stack)
 	i = 0;
 	while (stack)
 	{
-		if (stack->content < min && stack->index == -1)
+		if (stack->content < min)
 		{
 			min = stack->content;
 			index = i;
@@ -64,17 +64,24 @@ void	sort_3(t_list **stack)
 void	sort_5(t_list **stack_a, t_list **stack_b)
 {
 	int	min_index;
+	int	i;
 
-	min_index = find_smallest_index(*stack_a);
-	while (min_index--)
-		ra(stack_a);
-	pb(stack_a, stack_b);
-	if (ft_lstsize(*stack_a) == 4)
+	i = ft_lstsize(*stack_a);
+	while (i > 3)
 	{
 		min_index = find_smallest_index(*stack_a);
-		while (min_index--)
-			ra(stack_a);
+		if (min_index <= i / 2)
+		{
+			while (min_index > 0)
+				(ra(stack_a), min_index--);
+		}
+		else
+		{
+			while (min_index < i)
+				(rra(stack_a), min_index++);
+		}
 		pb(stack_a, stack_b);
+		i--;
 	}
 	sort_3(stack_a);
 	pa(stack_a, stack_b);

@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:00:16 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/19 13:55:47 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:55:25 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	push_chunks_to_b(t_list **stack_a, t_list **stack_b, int list_size)
 
 	i = 0;
 	if (list_size > 100)
-		chunk = 42;
+		chunk = 40;
 	else
 		chunk = 13;
 	while (i < list_size)
@@ -66,20 +66,25 @@ void	push_optimal_to_a(t_list **stack_a, t_list **stack_b)
 {
 	int	max;
 	int	moves;
+	int	size;
+	int	i;
 
+	size = ft_lstsize(*stack_b);
+	i = 0;
 	while (*stack_b)
 	{
 		max = find_max(*stack_b);
 		moves = calculate_moves(*stack_b, max);
 		if (moves > 0)
-			while ((*stack_b)->index != max)
+			while ((*stack_b)->index != max && i != size - 1)
 				rb(stack_b);
 		else if (moves < 0)
 		{
-			while ((*stack_b)->index != max)
+			while ((*stack_b)->index != max && i != size - 1)
 				rrb(stack_b);
 		}
 		pa(stack_a, stack_b);
+		i++;
 	}
 }
 
@@ -87,6 +92,7 @@ void	chunks_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 
+	indexing_stack(*stack_a);
 	size = ft_lstsize(*stack_a);
 	if (size == 2)
 		sa(stack_a);
@@ -96,7 +102,6 @@ void	chunks_sort(t_list **stack_a, t_list **stack_b)
 		sort_5(stack_a, stack_b);
 	else if (size > 5)
 	{
-		indexing_stack(*stack_a);
 		indexing_stack(*stack_b);
 		push_chunks_to_b(stack_a, stack_b, size);
 		push_optimal_to_a(stack_a, stack_b);
