@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 22:02:38 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/20 22:24:04 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/22 09:54:58 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	count_args(int size, char **av)
 	while (i < size)
 	{
 		split = ft_split(av[i], ' ');
+		if (!split)
+			return (exit(1), 0);
 		j = 0;
 		while (split[j])
 		{
@@ -83,15 +85,15 @@ void	ft_join(char **split, char **args, int *k)
 	int	j;
 
 	j = 0;
-	if (split == NULL)
-	{
-		free(split);
-		free(args);
-		exit(write(2, "Error\n", 6));
-	}
 	while (split[j])
 	{
 		args[*k] = ft_strdup(split[j]);
+		if (!args[*k])
+		{
+			ft_free(args);
+			ft_free(split);
+			exit(1);
+		}
 		if (!is_valid_number(args[*k]))
 		{
 			write(2, "Error\n", 6);
@@ -108,26 +110,27 @@ char	**read_input(int ac, char **av)
 {
 	char	**args;
 	char	**split;
+	int		count;
 	int		i;
 	int		k;
-	int		count;
 
-	i = 1;
 	k = 0;
 	count = 0;
-	if (ac < 2)
-		exit(1);
 	count = count_args(ac, av);
 	args = malloc(sizeof(char *) * (count + 1));
 	if (!args)
-		return (0);
+		return (ft_free(args), NULL);
+	i = 0;
+	while (i <= count)
+		args[i++] = NULL;
+	i = 1;
 	while (i < ac)
 	{
-		split = ft_split(av[i], ' ');
+		split = ft_split(av[i++], ' ');
+		if (!split)
+			return (ft_free(args), NULL);
 		ft_join(split, args, &k);
 		ft_free(split);
-		i++;
 	}
-	args[k] = NULL;
-	return (args);
+	return (args[k] = NULL, args);
 }

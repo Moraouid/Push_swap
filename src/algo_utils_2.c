@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:13:36 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/21 01:36:44 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/22 09:46:48 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	is_valid(int argc, char **argv, char ***args)
 	*args = read_input(argc, argv);
 	if (!args)
 		exit(write(2, "Error\n", 6));
+	if (!check_duplicates(*args))
+	{
+		write(2, "Error\n", 6);
+		ft_free(*args);
+		exit(1);
+	}
 }
 
 int	ft_len(char **str)
@@ -38,12 +44,17 @@ t_list	*add_to_stack(char **args, int size)
 	int		i;
 
 	a = ft_lstnew(ft_atoi(args[0]));
-	a->index = -1;
+	if (!a)
+		return (NULL);
 	i = 1;
 	while (i < size)
 	{
 		b = ft_lstnew(ft_atoi(args[i]));
-		b->index = -1;
+		if (!b)
+		{
+			ft_free_lst(a);
+			return (NULL);
+		}
 		ft_lstadd_back(&a, b);
 		i++;
 	}

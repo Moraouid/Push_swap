@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = src/push_swap.c src/reading.c src/handle_error.c src/operations_a.c \
        src/operations_b.c src/algo_sort.c src/algo_utils_1.c src/algo_utils_2.c \
 	   
-SRCS_BONUS = src_bonus/checker_bonus.c src_bonus/checker_utils.c  src_bonus/handle_error_bonus.c \
+SRCS_BONUS = src_bonus/checker_bonus.c src_bonus/utils_bonus.c src_bonus/handle_error_bonus.c \
 	   src_bonus/op_a_bonus.c src_bonus/op_b_bonus.c src_bonus/reading_bonus.c
 
 OBJS = $(SRCS:.c=.o)
