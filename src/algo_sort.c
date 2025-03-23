@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:00:16 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/21 01:55:25 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/23 22:24:23 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	push_chunks_to_b(t_list **stack_a, t_list **stack_b, int list_size)
 
 	i = 0;
 	if (list_size > 100)
-		chunk = 40;
+		chunk = 37;
 	else
 		chunk = 13;
 	while (i < list_size)
