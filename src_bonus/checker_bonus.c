@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 21:57:00 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/22 10:06:51 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:08:04 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	apply_operations(t_list **stack_a, t_list **stack_b)
 	char	*operation;
 
 	operation = get_next_line(0);
-	if(!operation)
+	if (!operation)
 		return (ft_free_lst(*stack_a), exit(1));
 	while (operation)
 	{
@@ -76,8 +76,8 @@ void	apply_operations(t_list **stack_a, t_list **stack_b)
 		}
 		free(operation);
 		operation = get_next_line(0);
-		if(!operation)
-			break;
+		if (!operation)
+			break ;
 	}
 	if (is_sorted(*stack_a) && !(*stack_b))
 		write(1, "OK\n", 3);
@@ -103,7 +103,7 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		return (ft_free(args), 0);
 	apply_operations(&stack_a, &stack_b);
-	if(stack_b)
+	if (stack_b)
 		ft_free_lst(stack_b);
 	ft_free_lst(stack_a);
 	ft_free(args);

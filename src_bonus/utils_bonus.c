@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 22:41:00 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/22 10:01:45 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:08:14 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ t_list	*add_to_stack(char **args, int size)
 	int		i;
 
 	a = ft_lstnew(ft_atoi(args[0]));
-	if(!a)
+	if (!a)
 		return (NULL);
 	i = 1;
 	while (i < size)
 	{
 		b = ft_lstnew(ft_atoi(args[i]));
-		if(!b)
+		if (!b)
 		{
 			ft_free_lst(a);
 			return (NULL);

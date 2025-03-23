@@ -25,23 +25,28 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(GNL_OBJS) $(LIBFT)
-
 	$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJS_BONUS) $(GNL_OBJS) $(LIBFT)
 
+
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) 
 
 clean:
-	make -C $(LIBFT_DIR) clean
-	rm -f $(OBJS) $(OBJS_BONUS) $(GNL_OBJS)
+	make -C $(LIBFT_DIR) clean 
+	rm -rf $(OBJS) $(OBJS_BONUS) $(GNL_OBJS) 
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
-	rm -f $(NAME) $(NAME_BONUS)
+	make -C $(LIBFT_DIR) fclean 
+	rm -f $(NAME) $(NAME_BONUS) 
 
 re: fclean all
+
+.SECONDARY: $(OBJS) $(OBJS_BONUS) $(GNL_OBJS)
 
 .PHONY: all clean fclean re bonus
