@@ -6,32 +6,32 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:08:55 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/20 22:17:15 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:37:00 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	find_smallest_index(t_list *stack)
+int	find_smallest_pos(t_list *stack)
 {
 	int	min;
-	int	index;
+	int	pos;
 	int	i;
 
 	min = INT_MAX;
-	index = 0;
+	pos = 0;
 	i = 0;
 	while (stack)
 	{
 		if (stack->content < min)
 		{
 			min = stack->content;
-			index = i;
+			pos = i;
 		}
 		stack = stack->next;
 		i++;
 	}
-	return (index);
+	return (pos);
 }
 
 void	sort_3(t_list **stack)
@@ -63,25 +63,25 @@ void	sort_3(t_list **stack)
 
 void	sort_5(t_list **stack_a, t_list **stack_b)
 {
-	int	min_index;
-	int	i;
+	int	min_pos;
+	int	size;
 
-	i = ft_lstsize(*stack_a);
-	while (i > 3)
+	size = ft_lstsize(*stack_a);
+	while (size > 3)
 	{
-		min_index = find_smallest_index(*stack_a);
-		if (min_index <= i / 2)
+		min_pos = find_smallest_pos(*stack_a);
+		if (min_pos <= size / 2)
 		{
-			while (min_index > 0)
-				(ra(stack_a), min_index--);
+			while (min_pos > 0)
+				(ra(stack_a), min_pos--);
 		}
 		else
 		{
-			while (min_index < i)
-				(rra(stack_a), min_index++);
+			while (min_pos < size)
+				(rra(stack_a), min_pos++);
 		}
 		pb(stack_a, stack_b);
-		i--;
+		size--;
 	}
 	sort_3(stack_a);
 	pa(stack_a, stack_b);

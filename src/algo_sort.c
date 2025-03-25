@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:00:16 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/23 22:24:23 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:33:05 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	indexing_stack(t_list *stack)
 	}
 }
 
-void	push_chunks_to_b(t_list **stack_a, t_list **stack_b, int list_size)
+void	push_to_b(t_list **stack_a, t_list **stack_b, int list_size)
 {
 	int	i;
 	int	chunk;
@@ -62,7 +62,7 @@ void	push_chunks_to_b(t_list **stack_a, t_list **stack_b, int list_size)
 	}
 }
 
-void	push_optimal_to_a(t_list **stack_a, t_list **stack_b)
+void	push_to_a(t_list **stack_a, t_list **stack_b)
 {
 	int	max;
 	int	moves;
@@ -92,18 +92,17 @@ void	chunks_sort(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 
-	indexing_stack(*stack_a);
 	size = ft_lstsize(*stack_a);
 	if (size == 2)
-		sa(stack_a);
+	sa(stack_a);
 	else if (size == 3)
-		sort_3(stack_a);
+	sort_3(stack_a);
 	else if (size == 5 || size == 4)
-		sort_5(stack_a, stack_b);
+	sort_5(stack_a, stack_b);
 	else if (size > 5)
 	{
-		indexing_stack(*stack_b);
-		push_chunks_to_b(stack_a, stack_b, size);
-		push_optimal_to_a(stack_a, stack_b);
+		indexing_stack(*stack_a);
+		push_to_b(stack_a, stack_b, size);
+		push_to_a(stack_a, stack_b);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 21:57:00 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/23 22:31:04 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:35:06 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	is_valid(argc, argv, &args);
 	len = ft_len(args);
-	if (len == 1)
-		return (ft_free(args), 0);
 	stack_a = add_to_stack(args, len);
 	if (!stack_a)
 		return (ft_free(args), 0);

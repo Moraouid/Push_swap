@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:15:56 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/17 22:25:53 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:43:44 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_list
 {
 	int				content;
 	int				index;
-	int				flage;
 	struct s_list	*next;
 }					t_list;
 

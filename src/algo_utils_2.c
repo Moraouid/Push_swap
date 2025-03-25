@@ -6,7 +6,7 @@
 /*   By: sel-abbo <sel-abbo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:13:36 by sel-abbo          #+#    #+#             */
-/*   Updated: 2025/03/22 09:46:48 by sel-abbo         ###   ########.fr       */
+/*   Updated: 2025/03/25 12:34:01 by sel-abbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	is_valid(int argc, char **argv, char ***args)
 {
+	int len;
+	
 	if (!check_args(argv))
 		exit(write(2, "Error\n", 6));
 	*args = read_input(argc, argv);
@@ -25,6 +27,9 @@ void	is_valid(int argc, char **argv, char ***args)
 		ft_free(*args);
 		exit(1);
 	}
+	len = ft_len(args);
+	if (len == 1)
+		return (ft_free(args), 0);
 }
 
 int	ft_len(char **str)
