@@ -14,8 +14,6 @@
 
 void	is_valid(int argc, char **argv, char ***args)
 {
-	int len;
-	
 	if (!check_args(argv))
 		exit(write(2, "Error\n", 6));
 	*args = read_input(argc, argv);
@@ -27,9 +25,6 @@ void	is_valid(int argc, char **argv, char ***args)
 		ft_free(*args);
 		exit(1);
 	}
-	len = ft_len(args);
-	if (len == 1)
-		return (ft_free(args), 0);
 }
 
 int	ft_len(char **str)

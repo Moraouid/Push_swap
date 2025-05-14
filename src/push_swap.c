@@ -26,6 +26,9 @@ int	main(int argc, char **argv)
 	len = ft_len(args);
 	if (len == 1)
 		return (ft_free(args), 0);
+	len = ft_len(args);
+	if (len == 1)
+		return (ft_free(args), 0);
 	stack_a = add_to_stack(args, len);
 	if (!stack_a)
 		return (ft_free(args), 0);
