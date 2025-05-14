@@ -57,6 +57,8 @@ void	rrb(t_list **stack)
 
 	prev = NULL;
 	last = *stack;
+	if (!prev || !prev->next)
+		return ;
 	while (last->next)
 	{
 		prev = last;
