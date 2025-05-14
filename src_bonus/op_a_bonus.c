@@ -45,6 +45,8 @@ void	rra(t_list **stack)
 
 	prev = NULL;
 	last = *stack;
+	f (!prev || !prev->next)
+		return ;
 	while (last->next)
 	{
 		prev = last;
